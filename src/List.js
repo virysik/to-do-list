@@ -1,33 +1,45 @@
-import React from "react";
+import React, { useState } from "react";
+import Path from "./Path";
 import "./List.css";
 
 export default function List() {
-    return (
-        <div className = "List">
-             <div className="row">
-                <div className="col-8">
-                    <ul>
-                        <li>
-                            _________________
-                        </li>
-                   </ul>
-                </div>
-                <div className="col-4">  
-                      <button className = "btn btn-primary">Not done</button>
-                </div> 
-            </div>
-                    
-            
-            <form>
-                <div className="row"> 
-                  <div className="col-9">  
-                     <input type="text" className = "form-control"  placeholder="type an action" />
-                   </div> 
-                   <div className="col-3">
-                        <input type="button" className="btn btn-primary" value="Add" />
-                   </div>
-                </div>
+    let [action, setAction] = useState(null)
+    let[second, setSecond] = useState(null)
+    let [typed, setTyped] = useState(false);
+    function updateAction(event) {
+        setAction(event.target.value);
+    }
+    function addAction() {
+        setTyped(true);
+        setSecond("______")
+
+    }
+    let form = (
+        <form onSubmit = {addAction}>
+                    <div className="row">
+                        <div className="col-9">
+                            <input type="text" onChange = {updateAction} className="form-control" placeholder="type an action" />
+                        </div>
+                        <div className="col-3">
+                            <input type="submit" className="btn btn-primary" value="Add" />
+                        </div>
+                    </div>
             </form>
-        </div>
-)
+    )
+    if (typed) {
+        return (
+            <div className="List">
+                <Path element={action} />
+                <Path element={second} />
+                {form}
+            </div>
+        )
+    } else {
+        return (
+            <div className="List">
+                <Path element= "____" />
+                {form}
+            </div>
+        )
+    }
 }
