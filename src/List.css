@@ -1,0 +1,11 @@
+.List {
+  margin: 15px;
+}
+
+.List .row {
+  margin-bottom: 20px;
+}
+
+.List li {
+  list-style: square;
+}
