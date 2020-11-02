@@ -3,16 +3,19 @@ import Path from "./Path";
 import "./List.css";
 
 export default function List() {
-    let [action, setAction] = useState(null)
-    let[second, setSecond] = useState(null)
-    let [typed, setTyped] = useState(false);
+    let [action, setAction] = useState({});
+    let [actions, setActions] = useState("____________");
+    
     function updateAction(event) {
-        setAction(event.target.value);
+        setAction({
+            task: event.target.value,
+            key: new Date()
+        });
+        console.log(action);
     }
-    function addAction() {
-        setTyped(true);
-        setSecond("______")
-
+    function addAction(event) {
+        event.preventDefault();
+        setActions(action.task);
     }
     let form = (
         <form onSubmit = {addAction}>
@@ -26,20 +29,11 @@ export default function List() {
                     </div>
             </form>
     )
-    if (typed) {
+    
         return (
             <div className="List">
-                <Path element={action} />
-                <Path element={second} />
+                <Path element={actions} />
                 {form}
             </div>
         )
-    } else {
-        return (
-            <div className="List">
-                <Path element= "____" />
-                {form}
-            </div>
-        )
-    }
 }
