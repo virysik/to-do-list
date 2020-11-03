@@ -18,22 +18,31 @@ export default function List() {
         setActions(action.task);
     }
     let form = (
-        <form onSubmit = {addAction}>
-                    <div className="row">
-                        <div className="col-9">
-                            <input type="text" onChange = {updateAction} className="form-control" placeholder="type an action" />
-                        </div>
-                        <div className="col-3">
-                            <input type="submit" className="btn btn-primary" value="Add" />
-                        </div>
-                    </div>
-            </form>
+        <form onSubmit={addAction}>
+            <div className="row">
+                <div className="col-9">
+                    <input type="text" onChange={updateAction} className="form-control" placeholder="type an action" />
+                </div>
+                <div className="col-3">
+                    <input type="submit" className="btn btn-primary" value="Add" />
+                </div>
+            </div>
+        </form>
     )
     
+    if (actions.length > 0) {
         return (
             <div className="List">
                 <Path element={actions} />
                 {form}
             </div>
         )
+    } else {
+        return (
+            <div className="List">
+                <Path element={"_____"} />
+                {form}
+            </div>
+        )
+    }
 }
